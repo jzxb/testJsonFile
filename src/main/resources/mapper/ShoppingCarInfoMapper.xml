@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lhx.mapper.ShoppingCarInfoMapper">
+  <resultMap id="BaseResultMap" type="org.lhx.bean.ShoppingCarInfo">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="sku_price" jdbcType="DOUBLE" property="skuPrice" />
+    <result column="user_real_name" jdbcType="VARCHAR" property="userRealName" />
+    <result column="user_nick_name" jdbcType="VARCHAR" property="userNickName" />
+    <result column="user_address" jdbcType="VARCHAR" property="userAddress" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_picture" jdbcType="VARCHAR" property="productPicture" />
+    <result column="sku_inventory" jdbcType="INTEGER" property="skuInventory" />
+    <result column="sku_attr" jdbcType="VARCHAR" property="skuAttr" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Id, sku_name, sku_price, user_real_name, user_nick_name, user_address, product_name, 
+    product_picture, sku_inventory, sku_attr
+  </sql>
+  <select id="selectByExample" parameterType="org.lhx.bean.ShoppingCarInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_mall_shoppingcar_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mall_shoppingcar_info
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_mall_shoppingcar_info
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.lhx.bean.ShoppingCarInfoExample">
+    delete from t_mall_shoppingcar_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.lhx.bean.ShoppingCarInfo">
+    insert into t_mall_shoppingcar_info (Id, sku_name, sku_price, 
+      user_real_name, user_nick_name, user_address, 
+      product_name, product_picture, sku_inventory, 
+      sku_attr)
+    values (#{id,jdbcType=INTEGER}, #{skuName,jdbcType=VARCHAR}, #{skuPrice,jdbcType=DOUBLE}, 
+      #{userRealName,jdbcType=VARCHAR}, #{userNickName,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{productPicture,jdbcType=VARCHAR}, #{skuInventory,jdbcType=INTEGER}, 
+      #{skuAttr,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lhx.bean.ShoppingCarInfo">
+    insert into t_mall_shoppingcar_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="skuName != null">
+        sku_name,
+      </if>
+      <if test="skuPrice != null">
+        sku_price,
+      </if>
+      <if test="userRealName != null">
+        user_real_name,
+      </if>
+      <if test="userNickName != null">
+        user_nick_name,
+      </if>
+      <if test="userAddress != null">
+        user_address,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="productPicture != null">
+        product_picture,
+      </if>
+      <if test="skuInventory != null">
+        sku_inventory,
+      </if>
+      <if test="skuAttr != null">
+        sku_attr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="skuName != null">
+        #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuPrice != null">
+        #{skuPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="userRealName != null">
+        #{userRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickName != null">
+        #{userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPicture != null">
+        #{productPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="skuInventory != null">
+        #{skuInventory,jdbcType=INTEGER},
+      </if>
+      <if test="skuAttr != null">
+        #{skuAttr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.lhx.bean.ShoppingCarInfoExample" resultType="java.lang.Long">
+    select count(*) from t_mall_shoppingcar_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_mall_shoppingcar_info
+    <set>
+      <if test="record.id != null">
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.skuName != null">
+        sku_name = #{record.skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuPrice != null">
+        sku_price = #{record.skuPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.userRealName != null">
+        user_real_name = #{record.userRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userNickName != null">
+        user_nick_name = #{record.userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAddress != null">
+        user_address = #{record.userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null">
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPicture != null">
+        product_picture = #{record.productPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuInventory != null">
+        sku_inventory = #{record.skuInventory,jdbcType=INTEGER},
+      </if>
+      <if test="record.skuAttr != null">
+        sku_attr = #{record.skuAttr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_mall_shoppingcar_info
+    set Id = #{record.id,jdbcType=INTEGER},
+      sku_name = #{record.skuName,jdbcType=VARCHAR},
+      sku_price = #{record.skuPrice,jdbcType=DOUBLE},
+      user_real_name = #{record.userRealName,jdbcType=VARCHAR},
+      user_nick_name = #{record.userNickName,jdbcType=VARCHAR},
+      user_address = #{record.userAddress,jdbcType=VARCHAR},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      product_picture = #{record.productPicture,jdbcType=VARCHAR},
+      sku_inventory = #{record.skuInventory,jdbcType=INTEGER},
+      sku_attr = #{record.skuAttr,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lhx.bean.ShoppingCarInfo">
+    update t_mall_shoppingcar_info
+    <set>
+      <if test="skuName != null">
+        sku_name = #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuPrice != null">
+        sku_price = #{skuPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="userRealName != null">
+        user_real_name = #{userRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickName != null">
+        user_nick_name = #{userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        user_address = #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPicture != null">
+        product_picture = #{productPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="skuInventory != null">
+        sku_inventory = #{skuInventory,jdbcType=INTEGER},
+      </if>
+      <if test="skuAttr != null">
+        sku_attr = #{skuAttr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lhx.bean.ShoppingCarInfo">
+    update t_mall_shoppingcar_info
+    set sku_name = #{skuName,jdbcType=VARCHAR},
+      sku_price = #{skuPrice,jdbcType=DOUBLE},
+      user_real_name = #{userRealName,jdbcType=VARCHAR},
+      user_nick_name = #{userNickName,jdbcType=VARCHAR},
+      user_address = #{userAddress,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_picture = #{productPicture,jdbcType=VARCHAR},
+      sku_inventory = #{skuInventory,jdbcType=INTEGER},
+      sku_attr = #{skuAttr,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="org.lhx.bean.ShoppingCarInfo">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="sku_price" jdbcType="DOUBLE" property="skuPrice" />
+    <result column="user_real_name" jdbcType="VARCHAR" property="userRealName" />
+    <result column="user_nick_name" jdbcType="VARCHAR" property="userNickName" />
+    <result column="user_address" jdbcType="VARCHAR" property="userAddress" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_picture" jdbcType="VARCHAR" property="productPicture" />
+    <result column="sku_inventory" jdbcType="INTEGER" property="skuInventory" />
+    <result column="sku_attr" jdbcType="VARCHAR" property="skuAttr" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Id, sku_name, sku_price, user_real_name, user_nick_name, user_address, product_name, 
+    product_picture, sku_inventory, sku_attr
+  </sql>
+  <select id="selectByExample" parameterType="org.lhx.bean.ShoppingCarInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_mall_shoppingcar_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mall_shoppingcar_info
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_mall_shoppingcar_info
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.lhx.bean.ShoppingCarInfoExample">
+    delete from t_mall_shoppingcar_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.lhx.bean.ShoppingCarInfo">
+    insert into t_mall_shoppingcar_info (Id, sku_name, sku_price, 
+      user_real_name, user_nick_name, user_address, 
+      product_name, product_picture, sku_inventory, 
+      sku_attr)
+    values (#{id,jdbcType=INTEGER}, #{skuName,jdbcType=VARCHAR}, #{skuPrice,jdbcType=DOUBLE}, 
+      #{userRealName,jdbcType=VARCHAR}, #{userNickName,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{productPicture,jdbcType=VARCHAR}, #{skuInventory,jdbcType=INTEGER}, 
+      #{skuAttr,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lhx.bean.ShoppingCarInfo">
+    insert into t_mall_shoppingcar_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="skuName != null">
+        sku_name,
+      </if>
+      <if test="skuPrice != null">
+        sku_price,
+      </if>
+      <if test="userRealName != null">
+        user_real_name,
+      </if>
+      <if test="userNickName != null">
+        user_nick_name,
+      </if>
+      <if test="userAddress != null">
+        user_address,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="productPicture != null">
+        product_picture,
+      </if>
+      <if test="skuInventory != null">
+        sku_inventory,
+      </if>
+      <if test="skuAttr != null">
+        sku_attr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="skuName != null">
+        #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuPrice != null">
+        #{skuPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="userRealName != null">
+        #{userRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickName != null">
+        #{userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPicture != null">
+        #{productPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="skuInventory != null">
+        #{skuInventory,jdbcType=INTEGER},
+      </if>
+      <if test="skuAttr != null">
+        #{skuAttr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.lhx.bean.ShoppingCarInfoExample" resultType="java.lang.Long">
+    select count(*) from t_mall_shoppingcar_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_mall_shoppingcar_info
+    <set>
+      <if test="record.id != null">
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.skuName != null">
+        sku_name = #{record.skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuPrice != null">
+        sku_price = #{record.skuPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.userRealName != null">
+        user_real_name = #{record.userRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userNickName != null">
+        user_nick_name = #{record.userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAddress != null">
+        user_address = #{record.userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null">
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPicture != null">
+        product_picture = #{record.productPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuInventory != null">
+        sku_inventory = #{record.skuInventory,jdbcType=INTEGER},
+      </if>
+      <if test="record.skuAttr != null">
+        sku_attr = #{record.skuAttr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_mall_shoppingcar_info
+    set Id = #{record.id,jdbcType=INTEGER},
+      sku_name = #{record.skuName,jdbcType=VARCHAR},
+      sku_price = #{record.skuPrice,jdbcType=DOUBLE},
+      user_real_name = #{record.userRealName,jdbcType=VARCHAR},
+      user_nick_name = #{record.userNickName,jdbcType=VARCHAR},
+      user_address = #{record.userAddress,jdbcType=VARCHAR},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      product_picture = #{record.productPicture,jdbcType=VARCHAR},
+      sku_inventory = #{record.skuInventory,jdbcType=INTEGER},
+      sku_attr = #{record.skuAttr,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lhx.bean.ShoppingCarInfo">
+    update t_mall_shoppingcar_info
+    <set>
+      <if test="skuName != null">
+        sku_name = #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuPrice != null">
+        sku_price = #{skuPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="userRealName != null">
+        user_real_name = #{userRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickName != null">
+        user_nick_name = #{userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        user_address = #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productPicture != null">
+        product_picture = #{productPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="skuInventory != null">
+        sku_inventory = #{skuInventory,jdbcType=INTEGER},
+      </if>
+      <if test="skuAttr != null">
+        sku_attr = #{skuAttr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lhx.bean.ShoppingCarInfo">
+    update t_mall_shoppingcar_info
+    set sku_name = #{skuName,jdbcType=VARCHAR},
+      sku_price = #{skuPrice,jdbcType=DOUBLE},
+      user_real_name = #{userRealName,jdbcType=VARCHAR},
+      user_nick_name = #{userNickName,jdbcType=VARCHAR},
+      user_address = #{userAddress,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_picture = #{productPicture,jdbcType=VARCHAR},
+      sku_inventory = #{skuInventory,jdbcType=INTEGER},
+      sku_attr = #{skuAttr,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!-- 配置数据库连接 -->
+		<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/mall_manage?serverTimezone=Asia/Shanghai" userId="root"
+			password="123456">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 指定javaBean生成的位置 -->
+		<javaModelGenerator targetPackage="org.lhx.bean"
+			targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!--指定sql映射文件生成的位置 -->
+		<sqlMapGenerator targetPackage="mapper" targetProject=".\src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- 指定dao接口生成的位置，mapper接口 -->
+		<javaClientGenerator type="XMLMAPPER"
+                             targetPackage="org.lhx.mapper" targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+
+		<!-- table指定每个表的生成策略 -->
+		<table tableName="t_mall_user_account" domainObjectName="UserAccount"></table>
+		<table tableName="t_mall_user_info" domainObjectName="UserInfo"></table>
+		<table tableName="t_mall_address" domainObjectName="Address"></table>
+		<table tableName="t_mall_user_pay" domainObjectName="UserPay"></table>
+		<table tableName="t_mall_product" domainObjectName="Product"></table>
+		<table tableName="t_mall_product_image" domainObjectName="ProductImage"></table>
+		<table tableName="t_mall_product_comment" domainObjectName="ProductComment"></table>
+		<table tableName="t_mall_comment_image" domainObjectName="CommentImage"></table>
+		<table tableName="t_mall_product_color" domainObjectName="ProductColor"></table>
+		<table tableName="t_mall_product_version" domainObjectName="ProductVersion"></table>
+		<table tableName="t_mall_sku" domainObjectName="Sku"></table>
+		<table tableName="t_mall_sku_attr_value" domainObjectName="SkuAttrValue"></table>
+		<table tableName="t_mall_ck_info" domainObjectName="CkInfo"></table>
+		<table tableName="t_mall_sku_image" domainObjectName="SkuImage"></table>
+		<table tableName="t_mall_product_sku_info" domainObjectName="ProductSkuInfo"></table>
+		<table tableName="t_mall_order" domainObjectName="Order"></table>
+		<table tableName="t_mall_order_info" domainObjectName="OrderInfo"></table>
+		<table tableName="t_mall_order_phase" domainObjectName="OrderPhase"></table>
+		<table tableName="t_mall_flow" domainObjectName="Flow"></table>
+		<table tableName="t_mall_trade_mark" domainObjectName="TradeMark"></table>
+		<table tableName="t_mall_tm_class" domainObjectName="TmClass"></table>
+		<table tableName="t_mall_class_1" domainObjectName="ClassOne"></table>
+		<table tableName="t_mall_class_2" domainObjectName="ClassTwo"></table>
+		<table tableName="t_mall_attr" domainObjectName="Attrbute"></table>
+		<table tableName="t_mall_value" domainObjectName="Value"></table>
+		<table tableName="t_mall_shoppingCar" domainObjectName="ShoppingCar"></table>
+		<table tableName="t_mall_shoppingCar_info" domainObjectName="ShoppingCarInfo"></table>
+		<table tableName="t_mall_user_login_log" domainObjectName="UserLoginLog"></table>
+		<table tableName="t_mall_miniCar" domainObjectName="MiniCar"></table>
+		<table tableName="t_mall_user_do_log" domainObjectName="UserDoLog"></table>
+		<table tableName="t_mall_search_info_log" domainObjectName="SearchInfoLog"></table>
+		<table tableName="t_mall_pay_flow_info_log" domainObjectName="PauFlowInfoLog"></table>
+		<table tableName="t_mall_redis_log" domainObjectName="RedisLog"></table>
+		<table tableName="t_mall_act" domainObjectName="Act"></table>
+		<table tableName="t_mall_flow_info" domainObjectName="FlowInfo"></table>
+	</context>
+</generatorConfiguration>
